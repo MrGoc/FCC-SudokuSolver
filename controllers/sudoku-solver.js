@@ -1,6 +1,3 @@
-const xAxis = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const yAxis = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-
 function convertPuzzleStringToGrid(puzzleString) {
   let myPuzzle = puzzleString.replaceAll(".", 0);
   let grid = [];
@@ -16,6 +13,13 @@ function convertPuzzleStringToGrid(puzzleString) {
 }
 
 class SudokuSolver {
+  xAxis() {
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  }
+  yAxis() {
+    return ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+  }
+
   validate(puzzleString) {
     if (!puzzleString) return "Required field missing";
     else if (puzzleString.length !== 81)
