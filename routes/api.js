@@ -11,7 +11,13 @@ module.exports = function (app) {
   });
 
   app.route("/api/solve").post((req, res) => {
-    let myRes = solver.validate(req.body.puzzle);
-    res.json(myRes);
+    let puzzle = req.body.puzzle;
+    let myRes = solver.validate(puzzle);
+    if (myRes !== "") {
+      res.json({ error: myRes });
+    } else {
+      myRes = solver.solve(puzzle);
+      res.json({ solution: myRes });
+    }
   });
 };
