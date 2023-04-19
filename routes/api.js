@@ -31,8 +31,22 @@ module.exports = function (app) {
         return;
       }
     }
-
+    let row = coordinate[0];
+    let col = +coordinate[1];
     let myRes = solver.validate(puzzle);
+    if (myRes === "") {
+      let rowOk = solver.checkRowPlacement(puzzle, row, col, value);
+      let colOk = solver.checkColPlacement(puzzle, row, col, value);
+      let boxOk = solver.checkRegionPlacement(puzzle, row, col, value);
+      let conflict = [];
+      if (rowOk && colOk && boxOk) myRes = { valid: true };
+      else {
+        if (!rowOk) conflict.push("row");
+        if (!colOk) conflict.push("column");
+        if (!boxOk) conflict.push("region");
+        myRes = { valid: false, conflict: conflict };
+      }
+    }
     res.json(myRes);
   });
 

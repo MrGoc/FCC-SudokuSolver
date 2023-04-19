@@ -58,7 +58,7 @@ class SudokuSolver {
 
     for (var r = 0; r < 3; r++) {
       for (var c = 0; c < 3; c++) {
-        if (grid[myRow + r][myCol + c] === value) return false;
+        if (grid[myRow + r][myCol + c] === +value) return false;
       }
     }
     return true;
