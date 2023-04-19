@@ -12,12 +12,15 @@ function convertPuzzleStringToGrid(puzzleString) {
   return grid;
 }
 
+const xAxisValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const yAxisValues = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+
 class SudokuSolver {
   xAxis() {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    return xAxisValues;
   }
   yAxis() {
-    return ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+    return yAxisValues;
   }
 
   validate(puzzleString) {
@@ -29,11 +32,37 @@ class SudokuSolver {
     else return "";
   }
 
-  checkRowPlacement(puzzleString, row, column, value) {}
+  checkRowPlacement(puzzleString, row, column, value) {
+    let myRow = yAxisValues.indexOf(row);
+    //let myCol = xAxisValues.indexOf(+column);
+    let grid = convertPuzzleStringToGrid(puzzleString);
+    for (let i = 0; grid[myRow].length; i++) {
+      if (grid[myRow][i] === +value) return false;
+    }
+    return true;
+  }
 
-  checkColPlacement(puzzleString, row, column, value) {}
+  checkColPlacement(puzzleString, row, column, value) {
+    let myCol = xAxisValues.indexOf(+column);
+    let grid = convertPuzzleStringToGrid(puzzleString);
+    for (let i = 0; grid.length; i++) {
+      if (grid[i][myCol] === +value) return false;
+    }
+    return true;
+  }
 
-  checkRegionPlacement(puzzleString, row, column, value) {}
+  checkRegionPlacement(puzzleString, row, column, value) {
+    let myRow = Math.floor(yAxisValues.indexOf(row) / 3) * 3;
+    let myCol = Math.floor(xAxisValues.indexOf(+column) / 3) * 3;
+    let grid = convertPuzzleStringToGrid(puzzleString);
+
+    for (var r = 0; r < 3; r++) {
+      for (var c = 0; c < 3; c++) {
+        if (grid[myRow + r][myCol + c] === value) return false;
+      }
+    }
+    return true;
+  }
 
   solve(puzzleString) {
     let grid = convertPuzzleStringToGrid(puzzleString);
