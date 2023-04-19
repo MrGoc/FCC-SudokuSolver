@@ -1,3 +1,20 @@
+const xAxis = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const yAxis = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+
+function convertPuzzleStringToGrid(puzzleString) {
+  let myPuzzle = puzzleString.replaceAll(".", 0);
+  let grid = [];
+  let row = [];
+  for (let i = 0; i < puzzleString.length; i++) {
+    row.push(+myPuzzle[i]); // convert element to number
+    if (row.length === 9) {
+      grid.push(row);
+      row = [];
+    }
+  }
+  return grid;
+}
+
 class SudokuSolver {
   validate(puzzleString) {
     if (!puzzleString) return "Required field missing";
@@ -15,6 +32,7 @@ class SudokuSolver {
   checkRegionPlacement(puzzleString, row, column, value) {}
 
   solve(puzzleString) {
+    let grid = convertPuzzleStringToGrid(puzzleString);
     return puzzleString;
   }
 }
