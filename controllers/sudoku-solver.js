@@ -44,7 +44,7 @@ class SudokuSolver {
     let myRow = yAxisValues.indexOf(row);
     //let myCol = xAxisValues.indexOf(+column);
     let grid = convertPuzzleStringToGrid(puzzleString);
-    for (let i = 0; grid[myRow].length; i++) {
+    for (let i = 0; i < grid[myRow].length; i++) {
       if (grid[myRow][i] === +value) return false;
     }
     return true;
@@ -53,7 +53,7 @@ class SudokuSolver {
   checkColPlacement(puzzleString, row, column, value) {
     let myCol = xAxisValues.indexOf(+column);
     let grid = convertPuzzleStringToGrid(puzzleString);
-    for (let i = 0; grid.length; i++) {
+    for (let i = 0; i < grid.length; i++) {
       if (grid[i][myCol] === +value) return false;
     }
     return true;
