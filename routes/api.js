@@ -39,7 +39,7 @@ module.exports = function (app) {
       let colOk = solver.checkColPlacement(puzzle, row, col, value);
       let boxOk = solver.checkRegionPlacement(puzzle, row, col, value);
       let conflict = [];
-      if (rowOk && colOk && boxOk) myRes = { valid: true };
+      if (rowOk && colOk && boxOk) res.json({ valid: true });
       else {
         if (!rowOk) conflict.push("row");
         if (!colOk) conflict.push("column");
