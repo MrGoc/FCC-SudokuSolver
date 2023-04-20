@@ -44,7 +44,7 @@ module.exports = function (app) {
         if (!rowOk) conflict.push("row");
         if (!colOk) conflict.push("column");
         if (!boxOk) conflict.push("region");
-        myRes = { valid: false, conflict: conflict };
+        res.json({ valid: false, conflict: conflict });
       }
     } else res.json({ error: myRes });
   });
