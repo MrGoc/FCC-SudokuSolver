@@ -11,7 +11,7 @@ module.exports = function (app) {
     let value = req.body.value;
     let xAxis = solver.xAxis();
     let yAxis = solver.yAxis();
-    if (!coordinate || !value) {
+    if (!coordinate || !value || !puzzle) {
       res.json({ error: "Required field(s) missing" });
       return;
     }
@@ -46,8 +46,7 @@ module.exports = function (app) {
         if (!boxOk) conflict.push("region");
         myRes = { valid: false, conflict: conflict };
       }
-    }
-    res.json(myRes);
+    } else res.json({ error: myRes });
   });
 
   app.route("/api/solve").post((req, res) => {
