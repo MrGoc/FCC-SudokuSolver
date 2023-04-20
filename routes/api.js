@@ -57,7 +57,7 @@ module.exports = function (app) {
       res.json({ error: myRes });
     } else {
       myRes = solver.solve(puzzle);
-      res.json({ solution: myRes });
+      res.json(myRes);
     }
   });
 };

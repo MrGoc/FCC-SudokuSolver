@@ -12,6 +12,14 @@ function convertPuzzleStringToGrid(puzzleString) {
   return grid;
 }
 
+function convertGridToPuzzleString(grid) {
+  let myPuzzle = "";
+  grid.forEach((row) => {
+    row.forEach((el) => (myPuzzle += el.toString()));
+  });
+  return myPuzzle;
+}
+
 const xAxisValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const yAxisValues = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
@@ -66,13 +74,16 @@ class SudokuSolver {
 
   solve(puzzleString) {
     let grid = convertPuzzleStringToGrid(puzzleString);
-    return puzzleString;
+    let myRes;
+    if (!solveSudoku(grid)) myRes = { error: "Puzzle cannot be solved" };
+    else {
+      let solvedPuzzle = convertGridToPuzzleString(grid);
+      myRes = { solution: solvedPuzzle };
+    }
+    return myRes;
   }
 }
 
-module.exports = SudokuSolver;
-
-/*
 function solveSudoku(board) {
   // Pronađi prazno polje na ploči
   let emptyCell = findEmptyCell(board);
@@ -138,5 +149,4 @@ function isValid(board, row, col, num) {
   return true;
 }
 
-
-*/
+module.exports = SudokuSolver;
