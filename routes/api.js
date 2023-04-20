@@ -35,6 +35,11 @@ module.exports = function (app) {
     let col = +coordinate[1];
     let myRes = solver.validate(puzzle);
     if (myRes === "") {
+      if (solver.valueExistsOnCoordinate(puzzle, row, col, value)) {
+        res.json({ valid: true });
+        return;
+      }
+
       let rowOk = solver.checkRowPlacement(puzzle, row, col, value);
       let colOk = solver.checkColPlacement(puzzle, row, col, value);
       let boxOk = solver.checkRegionPlacement(puzzle, row, col, value);

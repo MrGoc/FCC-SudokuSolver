@@ -31,6 +31,13 @@ class SudokuSolver {
     return yAxisValues;
   }
 
+  valueExistsOnCoordinate(puzzleString, row, column, value) {
+    let myRow = yAxisValues.indexOf(row);
+    let myCol = xAxisValues.indexOf(+column);
+    let grid = convertPuzzleStringToGrid(puzzleString);
+    return grid[myRow][myCol] === +value;
+  }
+
   validate(puzzleString) {
     if (!puzzleString) return "Required field missing";
     else if (puzzleString.length !== 81)
